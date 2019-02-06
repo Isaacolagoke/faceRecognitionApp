@@ -9,7 +9,7 @@ import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import './App.css';
 
 const app = new Clarifai.App({
-  apiKey: 'eee27749e1504540b5e710aedad8c9ea'
+  apiKey: 'eee27749e1504540b5e710aedad8c9ea' 
 });
 
 const particlesOptions = {
@@ -37,6 +37,7 @@ class App extends Component {
     const image = document.getElementById('inputimage');
     const width = Number(image.width);
     const height = Number(image.height);
+    
     return {
       leftCol: clarifaiFace.left_col * width,
       topRow: clarifaiFace.top_row * height,
@@ -46,6 +47,7 @@ class App extends Component {
   }
 
   displayFaceBox = (box) => {
+    console.log(box);
     this.setState({box: box});  
   }
 
@@ -59,7 +61,7 @@ class App extends Component {
       .predict(
         Clarifai.FACE_DETECT_MODEL,
         this.state.input)
-      .then(response => this.calculateFaceLocation(response))
+      .then(response => this.displayFaceBox ( this.calculateFaceLocation(response)))
       .catch(err => console.log(err)) 
   }
 
